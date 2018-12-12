@@ -9,15 +9,12 @@
     {
 
         <li>
-                <a asp-controller="Menu"
-                asp-action="ViewMenu"
-                asp-route-id="@menu.ID">@menu.Name</a>
-
+            <a asp-controller="Menu"
+               asp-action="ViewMenu"
+               asp-route-id="@menu.ID">@menu.Name</a>
         </li>
 
     }
-
-
 </ul>
 
-
+<a href="/MenuController/Add">Add</a>
