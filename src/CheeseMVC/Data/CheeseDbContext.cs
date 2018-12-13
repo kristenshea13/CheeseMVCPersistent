@@ -13,18 +13,13 @@ namespace CheeseMVC.Data
 
         public DbSet<CheeseMenu> CheeseMenus { get; set; }
 
-        public CheeseDbContext(DbContextOptions<CheeseDbContext> options) 
+        public CheeseDbContext(DbContextOptions<CheeseDbContext> options)
             : base(options)
         { }
-
-
-        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CheeseMenu>().HasKey(c => new { c.CheeseID, c.MenuID });
-
         }
-
     }
 }
