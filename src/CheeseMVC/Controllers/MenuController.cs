@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CheeseMVC.Data;
 using CheeseMVC.Models;
-using System.Collections.Generic;
 using CheeseMVC.ViewModels;
-using CheeseMVC.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CheeseMVC.Controllers
@@ -16,19 +17,16 @@ namespace CheeseMVC.Controllers
             context = dbContext;
         }
 
-
         public IActionResult Index()
         {
             List<Menu> menus = context.Menus.ToList();
             return View(menus);
-
         }
 
         public IActionResult Add()
         {
             AddMenuViewModel addMenuViewModel = new AddMenuViewModel();
             return View(addMenuViewModel);
-
         }
 
         [HttpPost]
@@ -42,18 +40,29 @@ namespace CheeseMVC.Controllers
                 };
 
                 context.Menus.Add(newMenu);
-                context.SaveChanges();
-                return Redirect("/Menu");
 
+                context.SaveChanges();
+
+                return Redirect("/Menu");
             }
 
             return View(addMenuViewModel);
         }
 
+        public IActionResult ViewMenu(int id)
+        {
+            List<CheeseMenu> items = context.CheeseMenus.Include(item => item.Cheese).
+                Where(cm => cm.MenuID == id).ToList();
 
+            Menu menu = context.Menus.Single(m => m.ID == id);
 
+            ViewMenuViewModel viewModel = new ViewMenuViewModel
+            {
+                Menu = menu,
+                Items = items
+            };
+            return View(viewModel);
 
-
-
+        }
     }
 }
