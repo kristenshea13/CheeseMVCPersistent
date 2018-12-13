@@ -21,6 +21,7 @@ namespace CheeseMVC.Controllers
         public IActionResult Index()
         {
             IList<Cheese> cheeses = context.Cheeses.Include(c => c.Category).ToList();
+            //check models
 
             return View(cheeses);
         }
