@@ -8,6 +8,6 @@ namespace CheeseMVC.Models
 
         public string Name { get; set; }
 
-        public IList<CheeseMenu> CheeseMenus { get; set; } = new List<CheeseMenu>();
+        public IList<CheeseMenu> CheeseMenus { get; set; }
     }
 }
