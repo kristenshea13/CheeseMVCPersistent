@@ -43,7 +43,7 @@ namespace CheeseMVC.Controllers
 
                 context.SaveChanges();
 
-                return Redirect("/Menu");
+                return Redirect("/Menu/ViewMenu/" + newMenu.ID);
             }
 
             return View(addMenuViewModel);
@@ -64,5 +64,16 @@ namespace CheeseMVC.Controllers
             return View(viewModel);
 
         }
+
+        public IActionResult AddItem(int id)
+        {
+            Menu menu = context.Menus.Single(m => m.ID == id);
+            List<Cheese> cheeses = context.Cheeses.ToList();
+            return View(new AddMenuItemViewModel(menu, cheeses));
+
+        }
+
+
+
     }
 }
