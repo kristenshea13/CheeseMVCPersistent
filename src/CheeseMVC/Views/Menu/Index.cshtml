@@ -2,19 +2,24 @@
 
 <h1>Menus</h1>
 
-<p><a asp-controller="Menu" asp-action="Add">Add Menu</a></p>
+<form>
+    <p><a asp-controller="Menu" asp-action="Add">Add Menu</a></p>
 
-<ul>
-    @foreach (var menu in Model)
-    {
+    <ul>
+        @foreach (var menu in Model)
+        {
 
-        <li>
-            <a asp-controller="Menu"
-               asp-action="ViewMenu"
-               asp-route-id="@menu.ID">@menu.Name</a>
-        </li>
+            <li>
+                <a asp-controller="Menu"
+                   asp-action="ViewMenu"
+                   asp-route-id="@menu.ID">@menu.Name</a>
+            </li>
 
-    }
-</ul>
+        }
+    </ul>
 
-<a href="Menu/Add">Add</a>
+
+
+
+
+</form>
