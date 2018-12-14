@@ -1,16 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CheeseMVC.Models;
+﻿using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CheeseMVC.ViewModels
 {
     public class AddMenuItemViewModel
     {
-
         public int MenuID { get; set; }
 
         public int CheeseID { get; set; }
@@ -19,7 +14,23 @@ namespace CheeseMVC.ViewModels
 
         public List<SelectListItem> Cheeses { get; set; }
 
+        public AddMenuItemViewModel()
+        {
+        }
 
+        public AddMenuItemViewModel(Menu menu, IEnumerable<Cheese> cheeses)
+        {
+            cheeses = (IEnumerable<Cheese>)new List<SelectListItem>();
+            foreach (var cheese in cheeses)
+            {
+                Cheeses.Add(new SelectListItem
+                {
+                    Value = CheeseID.ToString(),
+                    Text = cheese.Name
+                });
+            }
 
+            Menu = menu;
+        }
     }
 }
