@@ -9,21 +9,30 @@
 
 <h1>@Model.Menu.Name</h1>
 
-<ul>
-    @foreach (var cheeseMenu in Model.Items)
+<form asp-controller="Menu" asp-action="RemoveCheese">
+
+    <ul>
+
+        @foreach (var cheeseMenu in Model.Items)
+        {
+            <li><input type="checkbox" name="cheeseIds" value="@cheeseMenu.CheeseID" />@cheeseMenu.Cheese.Name</li>
+        }
+
+
+
+    </ul>
+    <input type="hidden" name="menuID" value="@Model.Menu.ID" />
+
+    @if (Model.Items.Count == 0)
     {
-        <li>@cheeseMenu.Cheese.Name</li>
+        <p><i>No menu items</i></p>
+
     }
 
 
+    <p><a asp-controller="Menu" asp-action="AddItem" asp-route-id="@Model.Menu.ID">Add Item</a></p>
 
-</ul>
-
-@if (Model.Items.Count == 0)
-{
-    <p><i>No menu items</i></p>
-
-}
+    <button type="submit">Delete Cheese</button>
 
 
-<p><a asp-controller="Menu" asp-action="AddItem" asp-route-id="@Model.Menu.ID">Add Item</a></p>
+</form>

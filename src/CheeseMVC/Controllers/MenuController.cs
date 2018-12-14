@@ -105,5 +105,34 @@ namespace CheeseMVC.Controllers
             return View(addMenuItemViewModel);
 
         }
+
+        [HttpPost]
+        public IActionResult Remove(int[] menuIds)
+        {
+            foreach (int menuId in menuIds)
+            {
+                Menu theCheese = context.Menus.Single(c => c.ID == menuId);
+                context.Menus.Remove(theCheese);
+            }
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult RemoveCheese(int[] cheeseIds, int menuID)
+        {
+            foreach (int cheeseId in cheeseIds)
+            {
+                CheeseMenu theCheese = context.CheeseMenus.Single(c => c.CheeseID == cheeseId && c.MenuID == menuID);
+                context.CheeseMenus.Remove(theCheese);
+            }
+
+            context.SaveChanges();
+
+            return RedirectToAction("ViewMenu", new { id = menuID });
+        }
+
     }
 }

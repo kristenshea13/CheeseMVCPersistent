@@ -2,7 +2,7 @@
 
 <h1>Menus</h1>
 
-<form>
+<form asp-controller="Menu" asp-action="Remove">
     <p><a asp-controller="Menu" asp-action="Add">Add Menu</a></p>
 
     <ul>
@@ -10,6 +10,7 @@
         {
 
             <li>
+                <input type="checkbox" name="menuIds" value="@menu.ID" />
                 <a asp-controller="Menu"
                    asp-action="ViewMenu"
                    asp-route-id="@menu.ID">@menu.Name</a>
@@ -18,7 +19,7 @@
         }
     </ul>
 
-
+    <button type="submit">Delete Menu</button>
 
 
 
