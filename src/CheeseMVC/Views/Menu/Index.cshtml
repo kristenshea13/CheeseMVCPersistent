@@ -1,24 +1,32 @@
 ﻿@model IEnumerable<CheeseMVC.Models.Menu>
 
+@{
+    ViewBag.Title = "Menus";
+}
+
 <h1>Menus</h1>
 
 <form asp-controller="Menu" asp-action="Remove">
+    
+    
+
+        <ul>
+            @foreach (var menu in Model)
+            {
+
+                <li>
+                    <input type="checkbox" name="menuIds" value="@menu.ID" />
+                    <a asp-controller="Menu"
+                       asp-action="ViewMenu"
+                       asp-route-id="@menu.ID">@menu.Name</a>
+                </li>
+
+            }
+        </ul>
+    
+    <br />
     <p><a asp-controller="Menu" asp-action="Add">Add Menu</a></p>
-
-    <ul>
-        @foreach (var menu in Model)
-        {
-
-            <li>
-                <input type="checkbox" name="menuIds" value="@menu.ID" />
-                <a asp-controller="Menu"
-                   asp-action="ViewMenu"
-                   asp-route-id="@menu.ID">@menu.Name</a>
-            </li>
-
-        }
-    </ul>
-
+    <br />
     <button type="submit">Delete Menu</button>
 
 
